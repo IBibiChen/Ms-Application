@@ -10,6 +10,18 @@ package com.zhilo.constant;
 public interface AuthConstants {
 
     /**
+     * JWT 登录认证请求处理 URL
+     */
+    String JWT_AUTH_PROCESSING_URL = "/auth/token";
+    /**
+     * 认证请求中，传递用户名的参数的名称
+     */
+    String PARAMETER_NAME_USERNAME = "username";
+    /**
+     * 认证请求中，传递密码的参数的名称
+     */
+    String PARAMETER_NAME_PASSWORD = "password";
+    /**
      * 认证信息 Http 请求头
      */
     String JWT_TOKEN_HEADER = "Authorization";
@@ -30,7 +42,7 @@ public interface AuthConstants {
     String PERMISSION_RULES_KEY = "auth:permission:rules";
 
     /**
-     * 黑名单token前缀
+     * 黑名单 token 前缀
      */
     String TOKEN_BLACKLIST_PREFIX = "auth:token:blacklist:";
 
@@ -56,29 +68,23 @@ public interface AuthConstants {
     String JWT_JTI_KEY = "client_id";
 
     /**
-     * JWT存储权限前缀
+     * JWT 存储权限前缀
      */
     String AUTHORITY_PREFIX = "ROLE_";
 
     /**
-     * JWT存储权限属性
+     * JWT 存储权限属性
      */
     String JWT_AUTHORITIES_KEY = "authorities";
 
-
     /**
-     * 有来商城后台管理客户端ID
+     * 后台管理客户端 ID
      */
-    String ADMIN_CLIENT_ID = "youlai-admin";
-
-
-    /**
-     * 有来商城微信小程序客户端ID
-     */
-    String WEAPP_CLIENT_ID = "youlai-mall-weapp";
+    String ADMIN_CLIENT_ID = "admin";
 
     /**
      * 后台管理接口路径匹配
      */
-    String ADMIN_URL_PATTERN = "/youlai-admin/**";
+    String ADMIN_URL_PATTERN = "/admin/**";
+
 }

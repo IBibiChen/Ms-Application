@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
@@ -26,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
+    private final PasswordEncoder passwordEncoder;
+
     private final AppAuthenticationSuccessHandler authenticationSuccessHandler;
 
     private final AppAuthenticationFailureHandler authenticationFailureHandler;
@@ -33,22 +34,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AppLogoutSuccessHandler logoutSuccessHandler;
 
     @Autowired
-    public WebSecurityConfig(UserDetailsService userDetailsService, AppAuthenticationSuccessHandler authenticationSuccessHandler, AppAuthenticationFailureHandler authenticationFailureHandler, AppLogoutSuccessHandler logoutSuccessHandler) {
+    public WebSecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, AppAuthenticationSuccessHandler authenticationSuccessHandler, AppAuthenticationFailureHandler authenticationFailureHandler, AppLogoutSuccessHandler logoutSuccessHandler) {
         this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
         this.authenticationFailureHandler = authenticationFailureHandler;
         this.logoutSuccessHandler = logoutSuccessHandler;
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder);
     }
 
     @Bean
