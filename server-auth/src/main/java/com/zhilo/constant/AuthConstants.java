@@ -22,6 +22,10 @@ public interface AuthConstants {
      */
     String PARAMETER_NAME_PASSWORD = "password";
     /**
+     * 互联网媒体类型，设置 Content-Type
+     */
+    String APPLICATION_JSON_UTF8 = "application/json;charset=UTF-8";
+    /**
      * 认证信息 Http 请求头
      */
     String JWT_TOKEN_HEADER = "Authorization";

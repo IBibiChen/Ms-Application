@@ -1,5 +1,7 @@
 package com.zhilo.authentication;
 
+import com.zhilo.authentication.jwt.JwtAuthenticationSecurityConfig;
+import com.zhilo.constant.AuthConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -27,19 +29,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final AppAuthenticationSuccessHandler authenticationSuccessHandler;
-
-    private final AppAuthenticationFailureHandler authenticationFailureHandler;
-
     private final AppLogoutSuccessHandler logoutSuccessHandler;
 
+    private final JwtAuthenticationSecurityConfig jwtAuthenticationSecurityConfig;
+
     @Autowired
-    public WebSecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, AppAuthenticationSuccessHandler authenticationSuccessHandler, AppAuthenticationFailureHandler authenticationFailureHandler, AppLogoutSuccessHandler logoutSuccessHandler) {
+    public WebSecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, AppAuthenticationSuccessHandler authenticationSuccessHandler, AppAuthenticationFailureHandler authenticationFailureHandler, AppLogoutSuccessHandler logoutSuccessHandler, JwtAuthenticationSecurityConfig jwtAuthenticationSecurityConfig) {
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
-        this.authenticationSuccessHandler = authenticationSuccessHandler;
-        this.authenticationFailureHandler = authenticationFailureHandler;
         this.logoutSuccessHandler = logoutSuccessHandler;
+        this.jwtAuthenticationSecurityConfig = jwtAuthenticationSecurityConfig;
     }
 
     @Override
@@ -57,10 +56,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                // JWT 认证相关配置
+                .apply(jwtAuthenticationSecurityConfig)
+                .and()
                 .authorizeRequests()
                 // 允许未经身份验证的访问 actuator 端点
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-                .antMatchers("/auth/token").permitAll()
+                .antMatchers(AuthConstants.JWT_AUTH_PROCESSING_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // .formLogin().and()

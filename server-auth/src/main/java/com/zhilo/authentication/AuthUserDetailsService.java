@@ -1,6 +1,6 @@
 package com.zhilo.authentication;
 
-import com.zhilo.model.User;
+import com.zhilo.common.model.AuthUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,16 +29,17 @@ public class AuthUserDetailsService implements UserDetailsService {
         //         .roles("ADMIN", "VIP")
         //         .build();
 
-        User user = new User();
-        user.setUsername(s);
-        user.setPassword("{bcrypt}$2a$10$cr7OU9Igw5MwAk7xjFbRduvaykVauvauodcJ7jSGhB8maG.BVeiji");
-        user.setEnabled(true);
+        AuthUser authUser = new AuthUser();
+        authUser.setId(1L);
+        authUser.setUsername(s);
+        authUser.setPassword("{bcrypt}$2a$10$cr7OU9Igw5MwAk7xjFbRduvaykVauvauodcJ7jSGhB8maG.BVeiji");
+        authUser.setEnabled(true);
         Set<GrantedAuthority> set = new HashSet<>();
         set.add(new SimpleGrantedAuthority(String.valueOf("/aaa")));
         set.add(new SimpleGrantedAuthority(String.valueOf("/bbb")));
 
-        user.setAuthorities(set);
-        return user;
+        authUser.setAuthorities(set);
+        return authUser;
     }
 
 

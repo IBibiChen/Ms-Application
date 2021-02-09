@@ -1,10 +1,12 @@
 package com.zhilo.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhilo.common.result.Result;
+import com.zhilo.common.result.ResultCode;
+import com.zhilo.constant.AuthConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -22,33 +24,35 @@ import java.io.IOException;
  * @since 2019/3/21
  */
 @Slf4j
-@Component("appAuthenticationFailureHandler")
+@Component
 public class AppAuthenticationFailureHandler implements AuthenticationFailureHandler {
-// public class ApiAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     /**
      * ObjectMapper：jackson 框架的工具类，用于转换对象为 json 字符串
      */
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    // @Autowired
-    // private SecurityProperties securityProperties;
+    @Autowired
+    public AppAuthenticationFailureHandler(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     /**
-     * @param request
-     * @param response
-     * @param exception
-     * @throws IOException
-     * @throws ServletException
+     * 认证失败处理
+     *
+     * @param request   HttpServletRequest
+     * @param response  HttpServletResponse
+     * @param exception 认证失败的异常
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        log.info("【认证失败】");
+        log.info("【认证失败，{}】", exception.getMessage());
+
+        Result<Object> result = Result.fail(ResultCode.AUTHENTICATION_FAIL.getCode(), exception.getMessage());
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-        // response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
+        response.setContentType(AuthConstants.APPLICATION_JSON_UTF8);
+        response.getWriter().write(objectMapper.writeValueAsString(result));
 
     }
 

@@ -1,20 +1,22 @@
-package com.zhilo.model;
+package com.zhilo.common.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.Set;
 
-
 /**
- * 登录用户信息
+ * 登录用户信息 .
+ *
+ * @author BibiChen
+ * @version v1.0
+ * @since 2021/2/9
  */
 @Data
 @NoArgsConstructor
-public class User implements UserDetails {
+public class AuthUser implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,7 +34,7 @@ public class User implements UserDetails {
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Set<GrantedAuthority> getAuthorities() {
         return this.authorities;
     }
 
@@ -65,4 +67,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
 }
