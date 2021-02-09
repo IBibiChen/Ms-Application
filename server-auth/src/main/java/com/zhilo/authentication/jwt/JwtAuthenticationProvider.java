@@ -55,6 +55,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
             // 检查完成，创建认证成功的 token 返回
             JwtAuthenticationToken authenticationResult = new JwtAuthenticationToken(user, authentication.getCredentials(), user.getAuthorities());
+
             // 将未认证之前存放到 token 中的请求的详情(ip、SessionId) copy 到认证成功后的 token 中
             authenticationResult.setDetails(authentication.getDetails());
 

@@ -56,14 +56,11 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
         username = username.trim();
 
-        // SmsCodeAuthenticationToken authRequest = new SmsCodeAuthenticationToken(mobile, null);
-        //
-        // setDetails(request, authRequest);
-        //
-        // return this.getAuthenticationManager().authenticate(authRequest);
+        JwtAuthenticationToken authRequest = new JwtAuthenticationToken(username, password);
 
+        setDetails(request, authRequest);
 
-        return null;
+        return this.getAuthenticationManager().authenticate(authRequest);
     }
 
     /**
