@@ -1,7 +1,9 @@
 package com.zhilo.authentication;
 
-import com.zhilo.authentication.jwt.JwtAuthenticationSecurityConfig;
-import com.zhilo.constant.AuthConstants;
+import com.zhilo.common.authentication.AppAuthenticationFailureHandler;
+import com.zhilo.common.authentication.AppAuthenticationSuccessHandler;
+import com.zhilo.common.authentication.jwt.JwtAuthenticationSecurityConfig;
+import com.zhilo.common.constant.AuthConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;

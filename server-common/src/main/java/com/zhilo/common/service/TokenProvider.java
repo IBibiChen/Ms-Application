@@ -1,5 +1,6 @@
 package com.zhilo.common.service;
 
+import com.zhilo.common.authentication.jwt.JwtAuthenticationToken;
 import com.zhilo.common.model.AuthUser;
 import com.zhilo.common.model.AuthUserToken;
 import com.zhilo.common.properties.JwtSecurityProperties;
@@ -83,20 +84,20 @@ public class TokenProvider implements InitializingBean {
                 .compact();
     }
 
-    // /**
-    //  * 依据 Token 获取鉴权信息
-    //  *
-    //  * @param token token
-    //  * @return Authentication
-    //  */
-    // Authentication getAuthentication(String token) {
-    //     Claims claims = getClaims(token);
-    //     AuthUser authUser = new AuthUser();
-    //     authUser.setId(claims.get("id", Long.class));
-    //     authUser.setUsername((String) claims.get("username"));
-    //     authUser.setAuthorities(claims.get("authorities"));
-    //     return new JwtAuthenticationToken(authUser, "******", authUser.getAuthorities());
-    // }
+    /**
+     * 依据 Token 获取鉴权信息
+     *
+     * @param token token
+     * @return Authentication
+     */
+    public Authentication getAuthentication(String token) {
+        Claims claims = getClaims(token);
+        AuthUser authUser = new AuthUser();
+        authUser.setId(claims.get("id", Long.class));
+        authUser.setUsername((String) claims.get("username"));
+        // authUser.setAuthorities(claims.get("authorities"));
+        return new JwtAuthenticationToken(authUser, "******", authUser.getAuthorities());
+    }
 
     /**
      * 从 Token 中获取 Claim

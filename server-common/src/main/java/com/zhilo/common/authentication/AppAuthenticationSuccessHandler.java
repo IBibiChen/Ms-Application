@@ -1,9 +1,9 @@
-package com.zhilo.authentication;
+package com.zhilo.common.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhilo.common.constant.AuthConstants;
 import com.zhilo.common.result.Result;
 import com.zhilo.common.service.TokenProvider;
-import com.zhilo.constant.AuthConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

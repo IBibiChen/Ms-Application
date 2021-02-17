@@ -20,7 +20,7 @@ public enum ResultCode implements IResultCode {
      * Token
      */
     AUTHENTICATION_FAIL("401", "认证失败"),
-    TOKEN_INVALIDED("401", "Token 非法，用户不允许访问！"),
+    TOKEN_INVALID("401", "Token 非法，认证失败！"),
     UN_AUTHORIZATION("403", "用户无权访问！");
 
     private final String code;

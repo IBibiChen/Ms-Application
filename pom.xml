@@ -18,7 +18,9 @@
     <modules>
         <module>server-gateway</module>
         <module>server-auth</module>
+        <module>server-authorization</module>
         <module>server-common</module>
+        <module>user-center</module>
     </modules>
 
     <properties>

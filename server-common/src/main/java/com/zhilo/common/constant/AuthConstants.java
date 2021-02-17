@@ -1,4 +1,4 @@
-package com.zhilo.constant;
+package com.zhilo.common.constant;
 
 /**
  * AuthConstants .

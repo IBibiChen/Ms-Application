@@ -1,4 +1,4 @@
-package com.zhilo.common;
+package com.zhilo;
 
 import com.zhilo.common.properties.JwtSecurityProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;

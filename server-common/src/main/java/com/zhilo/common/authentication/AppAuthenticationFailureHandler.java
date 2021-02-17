@@ -1,9 +1,9 @@
-package com.zhilo.authentication;
+package com.zhilo.common.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zhilo.common.constant.AuthConstants;
 import com.zhilo.common.result.Result;
 import com.zhilo.common.result.ResultCode;
-import com.zhilo.constant.AuthConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,6 +51,7 @@ public class AppAuthenticationFailureHandler implements AuthenticationFailureHan
         Result<Object> result = Result.fail(ResultCode.AUTHENTICATION_FAIL.getCode(), exception.getMessage());
 
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setCharacterEncoding("UTF-8");
         response.setContentType(AuthConstants.APPLICATION_JSON_UTF8);
         response.getWriter().write(objectMapper.writeValueAsString(result));
 

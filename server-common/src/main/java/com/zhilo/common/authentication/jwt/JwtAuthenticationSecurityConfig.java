@@ -1,4 +1,4 @@
-package com.zhilo.authentication.jwt;
+package com.zhilo.common.authentication.jwt;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

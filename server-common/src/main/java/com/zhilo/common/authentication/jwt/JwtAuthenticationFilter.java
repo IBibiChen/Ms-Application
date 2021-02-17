@@ -1,13 +1,13 @@
-package com.zhilo.authentication.jwt;
+package com.zhilo.common.authentication.jwt;
 
-import com.zhilo.constant.AuthConstants;
+import com.zhilo.common.authentication.jwt.JwtAuthenticationToken;
+import com.zhilo.common.constant.AuthConstants;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
-import sun.security.util.SecurityConstants;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
